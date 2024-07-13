@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Signup</title>
+    <link rel="stylesheet" href="/public/admin_signup.css"> <!-- Correct path to CSS -->
+</head>
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/admin_signup">Signup</a></li>
+            <li><a href="/admin_login">Login</a></li>
+           
+        </ul>
+    </nav>
+
+    <h1>User Signup Page</h1>
+    <form action="/admin_signup" method="POST">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+        <label for="confirm_password">Confirm Password:</label>
+        <input type="password" id="confirm_password" name="confirm_password" required>
+        <br>
+        <button type="submit">Signup</button>
+    </form>
+    <p style="color: red;"><%= message %></p> <!-- Display error message if passwords do not match -->
+</body>
+</html>
