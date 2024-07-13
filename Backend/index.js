@@ -12,7 +12,6 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -31,10 +30,6 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
-
-
-
-
 
 // Route handler for the root URL
 app.get('/', (req, res) => {
@@ -75,12 +70,6 @@ app.post('/admin_signup', async (req, res) => {
     }
 });
 
-
-
-
-
-
-
 // Route handler for admin login page - GET request
 app.get('/admin_login', (req, res) => {
     res.render('admin_login', { message: '' }); // Render admin_login.ejs with an empty message
@@ -115,16 +104,10 @@ app.post('/admin_login', (req, res) => {
     });
 });
 
-
-
-
-
-// Route handler for upload_new_item page - GET request
 // Route handler for upload_new_item page - GET request
 app.get('/upload_new_item', (req, res) => {
     res.render('upload_new_item', { message: '' }); // Render upload_new_item.ejs with an empty message
 });
-
 
 // Route handler for handling item upload - POST request
 app.post('/upload_new_item', upload.single('item_image'), (req, res) => {
@@ -140,6 +123,20 @@ app.post('/upload_new_item', upload.single('item_image'), (req, res) => {
         }
         console.log('Item added successfully');
         res.send('Item added successfully'); // Send success message
+    });
+});
+
+// Route handler for items page - GET request
+app.get('/items', (req, res) => {
+    // Query all items from the database
+    const query = 'SELECT * FROM item';
+    pool.query(query, (error, results) => {
+        if (error) {
+            console.error('Error executing query:', error);
+            return res.status(500).send('Error executing query');
+        }
+        // Render the items page and pass the results to the template
+        res.render('items', { items: results });
     });
 });
 
