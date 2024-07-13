@@ -1,0 +1,27 @@
+<!-- items.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Items</title>
+    <link rel="stylesheet" href="/public/items.css">
+    <style>
+        /* Additional styles can be added here */
+    </style>
+</head>
+<body>
+    <h1>Available Items</h1>
+    <ul>
+        <% items.forEach(item => { %>
+            <li>
+                <img src="/public/uploads/<%= item.item_image %>" alt="<%= item.item_title %>">
+                <h2><%= item.item_title %></h2>
+                <p>Price with Ice Cream: $<%= item.price_with_ice_cream %></p>
+                <p>Price without Ice Cream: $<%= item.price_without_ice_cream %></p>
+            </li>
+        <% }); %>
+    </ul>
+</body>
+</html>
